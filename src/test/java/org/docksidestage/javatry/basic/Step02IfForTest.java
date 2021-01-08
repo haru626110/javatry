@@ -204,13 +204,25 @@ public class Step02IfForTest extends PlainTestCase {
      * (if文for文についてあなたのオリジナルの質問形式のエクササイズを作ってみましょう)
      * <pre>
      * _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-     * your question here (ここにあなたの質問を):
-     * 
+     * your question here (ここにあなたの質問を)
+             メソッド終了時のseaの中身は？
      * _/_/_/_/_/_/_/_/_/_/
      * </pre>
      */
     public void test_iffor_yourExercise() {
         // write your code here
+        List<String> stageList = prepareStageList();
+        List<String> sea = new ArrayList<>();
+
+        for (String stage : stageList) {
+            if (stage.contains("d")) {
+                sea.add(stage);
+            }
+        }
+
+        for (String answer : sea) {
+            log(answer);
+        }
     }
 
     // ===================================================================================
