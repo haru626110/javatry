@@ -44,7 +44,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
     //                                        --------------
     /**
      * Fix several mistakes in buying one-day passport and in-park process. <br>
-     * (OneDayPassportを買って InPark する処理の中で、間違いがいくつかあるので修正しましょう)
+     * (OneDayPassportを買って InPark する処理の中で、間違いが５つかあるので修正しましょう)
      */
     public void test_objectOriented_aboutObject_againstObject() {
         //

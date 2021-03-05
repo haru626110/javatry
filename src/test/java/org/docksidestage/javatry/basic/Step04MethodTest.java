@@ -109,17 +109,17 @@ public class Step04MethodTest extends PlainTestCase {
     public void test_method_instanceVariable() {
         hasAnnualPassport = true;
         int sea = inParkCount;
-        offAnnualPassport(hasAnnualPassport);
+        offAnnualPassport(hasAnnualPassport);//ここではhasAnnualPassportはfalseにはならないためgoToParkのif文が回る
         for (int i = 0; i < 100; i++) {
             goToPark();
         }
         ++sea;
         sea = inParkCount;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 100
     }
 
     private void offAnnualPassport(boolean hasAnnualPassport) {
-        hasAnnualPassport = false;
+        hasAnnualPassport = false;//hasAnnualPassportをfalseにしているがグローバルには影響しない
     }
 
     private void goToPark() {
@@ -152,12 +152,33 @@ public class Step04MethodTest extends PlainTestCase {
      */
     public void test_method_making() {
         // comment out after making these methods
-        //String replaced = replaceCtoB(replaceAtoB("ABC"));
-        //String sea = addPrefix("broadway", replaced);
-        //if (isAvailableLogging()) {
-        //    showSea(sea);
-        //}
+        String replaced = replaceCtoB(replaceAtoB("ABC"));
+        String sea = addPrefix("broadway", replaced);
+        if (isAvailableLogging()) {
+            showSea(sea);
+        }
     }
 
     // write methods here
+    private String replaceAtoB(String str) {
+        return str.replace("A", "B");//AをBに置き換えて返す
+    }
+
+    private String replaceCtoB(String str) {
+        return str.replace("C", "B");//CをBに置き換えて返す
+    }
+
+    private String addPrefix(String str1, String str2) {
+        return str1 + ":" + str2;//str1とstr2を連結して返す
+    }
+
+    private boolean availableLogging = true;
+
+    private boolean isAvailableLogging() {
+        return availableLogging;//availableLoggingを返す
+    }
+
+    private void showSea(String str) {
+        log(str);//strを表示する
+    }
 }
