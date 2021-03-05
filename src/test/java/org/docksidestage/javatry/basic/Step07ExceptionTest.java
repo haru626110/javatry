@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 the original author or authors.
+ * Copyright 2019-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,26 +117,28 @@ public class Step07ExceptionTest extends PlainTestCase {
     }
 
     private void throwCauseFirstLevel() {
-        int count = -1;
+        int symbol = 1;
         try {
-            throwCauseSecondLevel(count);
+            throwCauseSecondLevel(symbol);
         } catch (IllegalArgumentException e) {
-            throw new IllegalStateException("Failed to call the second help method: " + count, e);
+            throw new IllegalStateException("Failed to call the second help method: symbol=" + symbol, e);
         }
     }
 
-    private void throwCauseSecondLevel(int count) {
+    private void throwCauseSecondLevel(int symbol) {
         try {
-            if (count < 0) {
-                throwCauseThirdLevel(count);
+            --symbol;
+            symbol--;
+            if (symbol < 0) {
+                throwCauseThirdLevel(symbol);
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Failed to call the third help method: " + count, e);
+            throw new IllegalArgumentException("Failed to call the third help method: symbol=" + symbol, e);
         }
     }
 
-    private void throwCauseThirdLevel(int count) {
-        if (count < 0) {
+    private void throwCauseThirdLevel(int symbol) {
+        if (symbol < 0) {
             Integer.valueOf("piari");
         }
     }
@@ -201,7 +203,10 @@ public class Step07ExceptionTest extends PlainTestCase {
         }
     }
 
-    private void helpThrowIllegalState() { // simple implementation here
-        throw new IllegalStateException("something illegal");
+    private void helpThrowIllegalState() {
+        if (true) { // simulate something illegal
+            String importantValue = "dummy"; // important to debug
+            throw new IllegalStateException("something illegal: importantValue=" + importantValue);
+        }
     }
 }

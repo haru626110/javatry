@@ -25,6 +25,7 @@ public class TicketBooth {
     //                                                                          ==========
     private static final int MAX_QUANTITY = 10;
     private static final int ONE_DAY_PRICE = 7400; // when 2019/06/15
+    private static final int TWO_DAY_PRICE = 13200;
 
     // ===================================================================================
     //                                                                           Attribute
@@ -42,17 +43,40 @@ public class TicketBooth {
     //                                                                          Buy Ticket
     //                                                                          ==========
     public void buyOneDayPassport(int handedMoney) {
-        if (quantity <= 0) {
+        if (quantity <= 0) {//チケット枚数が0なら売り切れ
             throw new TicketSoldOutException("Sold out");
         }
-        --quantity;
-        if (handedMoney < ONE_DAY_PRICE) {
+        if (handedMoney >= ONE_DAY_PRICE) {//handedMoneyがONE_DAY_PRICE以上ならチケットを1枚購入
+            --quantity;
+        }
+        if (handedMoney < ONE_DAY_PRICE) {//handedMoneyがONE_DAY_PRICE未満の場合、アナウンス
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
         if (salesProceeds != null) {
             salesProceeds = salesProceeds + handedMoney;
         } else {
-            salesProceeds = handedMoney;
+            salesProceeds = ONE_DAY_PRICE;//売上加算
+        }
+    }
+
+    public void buyTwoDayPassport(int handedMoney) {
+        if (quantity <= 0) {//チケット枚数が0なら売り切れ
+            throw new TicketSoldOutException("Sold out");
+        }
+        if (handedMoney >= TWO_DAY_PRICE) {//handedMoneyがONE_DAY_PRICE以上ならチケットを1枚購入
+            --quantity;
+        }
+        if (handedMoney > TWO_DAY_PRICE) {
+            int change = handedMoney - TWO_DAY_PRICE;
+            return change;
+        }
+        if (handedMoney < TWO_DAY_PRICE) {//handedMoneyがONE_DAY_PRICE未満の場合、アナウンス
+            throw new TicketShortMoneyException("Short money: " + handedMoney);
+        }
+        if (salesProceeds != null) {
+            salesProceeds = salesProceeds + handedMoney;
+        } else {
+            salesProceeds = TWO_DAY_PRICE;//売上加算
         }
     }
 

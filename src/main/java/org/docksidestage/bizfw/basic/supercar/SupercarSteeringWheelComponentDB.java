@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 the original author or authors.
+ * Copyright 2019-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,9 @@ public class SupercarSteeringWheelComponentDB {
 
     public SupercarSteeringWheelComponentDB() {
         clincherSpecMap = new HashMap<>();
-        clincherSpecMap.put(1, "(Correct spec text)");
-        clincherSpecMap.put(2, "(Correct spec text)");
-        clincherSpecMap.put(3, "\\(^_^)/");
+        clincherSpecMap.put(1, new String(new byte[] { 0x2d, 0x5b, 0x40, 0x5f, 0x40, 0x5d, 0x2d }));
+        clincherSpecMap.put(2, new String(new byte[] { 0x2f, 0x28, 0x3e, 0x5f, 0x3c, 0x29, 0x5c }));
+        clincherSpecMap.put(3, new String(new byte[] { 0x5c, 0x28, 0x5e, 0x5f, 0x5e, 0x29, 0x2f }));
     }
 
     public String findClincherSpecText(Integer clincherSpecId) {
